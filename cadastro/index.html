@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SAAC · Cadastro de Tapa-buraco e Lombada</title>
+  <meta name="description" content="Cadastro de atendimentos de tapa-buraco e lombadas — São Carlos/SP.">
+  <meta name="theme-color" content="#0b4da2">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b4da2'/%3E%3Cpath d='M32 14c-7.2 0-13 5.6-13 12.6 0 9 13 23.4 13 23.4s13-14.4 13-23.4C45 19.6 39.2 14 32 14z' fill='%23fff'/%3E%3Ccircle cx='32' cy='27' r='5' fill='%2316a34a'/%3E%3C/svg%3E">
+  <style>
+    :root { --azul:#0b4da2; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; height:100%; background:#eef2f7; }
+    #app { border:0; width:100%; height:100vh; height:100dvh; display:block; }
+    #loader{
+      position:fixed; inset:0; z-index:10;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:18px; background:linear-gradient(160deg,#0b4da2 0%,#0a4291 100%); color:#fff;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      transition:opacity .5s ease; text-align:center; padding:24px;
+    }
+    #loader.hide{ opacity:0; pointer-events:none; }
+    .spin{ width:46px; height:46px; border-radius:50%; border:4px solid rgba(255,255,255,.25); border-top-color:#fff; animation:spin 1s linear infinite; }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+    .ttl{ font-size:18px; font-weight:700; }
+    .sub{ font-size:13px; opacity:.85; max-width:320px; line-height:1.4; }
+    .fallback{ margin-top:8px; font-size:13px; } .fallback a{ color:#bfe3ff; }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <div class="spin" aria-hidden="true"></div>
+    <div class="ttl">SAAC · Cadastro</div>
+    <div class="sub">Carregando o cadastro… Se pedir login, use sua conta Google.</div>
+    <div class="fallback" id="fb" style="opacity:0;transition:opacity .4s;">
+      Está demorando?
+      <a href="https://script.google.com/macros/s/AKfycbwvroAG5GP-omDHeYsi1JIKlM0avz_WMe246hf1lOUEjXcvt2imYIai3LlIkfALHRIkVg/exec?modo=cadastro" target="_blank" rel="noopener">Abrir em nova aba</a>
+    </div>
+  </div>
+
+  <iframe id="app"
+    src="https://script.google.com/macros/s/AKfycbwvroAG5GP-omDHeYsi1JIKlM0avz_WMe246hf1lOUEjXcvt2imYIai3LlIkfALHRIkVg/exec?modo=cadastro"
+    title="SAAC · Cadastro de Tapa-buraco e Lombada"
+    allow="geolocation; clipboard-write"></iframe>
+
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      var frame  = document.getElementById('app');
+      var fb     = document.getElementById('fb');
+      function hide(){ loader.classList.add('hide'); }
+      frame.addEventListener('load', function(){ setTimeout(hide, 400); });
+      setTimeout(function(){ fb.style.opacity = '1'; }, 6000);
+      setTimeout(hide, 12000);
+    })();
+  </script>
+</body>
+</html>
